@@ -1,0 +1,19 @@
+.dialog {
+  width: min(400px, calc(100vw - 32px));
+  padding: 20px;
+  border: 0;
+  border-top: 4px solid var(--orange);
+  color: var(--text);
+}
+.dialog h2 { color: var(--orange); font-size: 1.5rem; }
+.dialog::backdrop { background: rgb(0 0 0 / 0.5); }
+
+.order { margin: 2px 0 12px; color: var(--muted); }
+
+.dialog ul { border-top: 1px solid var(--line); }
+.dialog li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+
+.total { display: flex; justify-content: space-between; align-items: baseline; margin: 14px 0; font-size: 1.1rem; }
+.total strong { color: var(--orange); font-size: 1.3rem; }
+
+.dialog > button { width: 100%; min-height: 44px; }

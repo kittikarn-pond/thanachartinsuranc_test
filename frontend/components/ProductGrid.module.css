@@ -1,0 +1,31 @@
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 14px 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.12);
+  text-align: center;
+}
+
+.name { margin: 0; min-height: 3em; font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
+
+.price { margin: 6px 0 10px; color: var(--orange); font-size: 1.15rem; font-weight: 600; }
+
+.details { width: 100%; margin-bottom: 14px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--muted); }
+.warn { color: var(--red); font-weight: 600; }
+
+.buy { width: 100%; margin-top: auto; }
+
+.stepper { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: auto; width: 100%; }
+.stepper button { width: 40px; padding: 0; }
+.stepper span { min-width: 40px; font-weight: 600; font-size: 1.05rem; }
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .card { padding: 14px 10px 12px; }
+  .name { font-size: 0.95rem; }
+}

@@ -1,0 +1,16 @@
+bin/
+obj/
+.vs/
+*.user
+node_modules/
+.next/
+
+# Local-only settings (your own DB port/password)
+backend/ShopApi/appsettings.Development.json
+frontend/.env.local
+
+# Backend logs
+backend/ShopApi/logs/
+
+# Separate cloned repo, not part of this project
+thanachartinsuranc_test/
