@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using ShopApi.Controllers;
 using ShopApi.Data;
@@ -10,7 +11,12 @@ builder.Host.UseSerilog((context, logger) => logger.ReadFrom.Configuration(conte
 
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(o => o.InvalidModelStateResponseFactory = InvalidRequestResponse.Create);
-builder.Services.AddScoped<ICartRepository, MySqlCartRepository>();
+builder.Services.AddDbContext<ShopDbContext>((services, options) =>
+{
+    var connection = services.GetRequiredService<IConfiguration>().GetConnectionString("Default")!;
+    options.UseMySql(connection, ServerVersionCache.For(connection));
+});
+builder.Services.AddScoped<ICartRepository, EfCartRepository>();
 builder.Services.AddScoped<CartService>();
 builder.Services.AddScoped<StockService>();
 builder.Services.AddScoped<ProductService>();

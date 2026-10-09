@@ -72,7 +72,7 @@ dotnet test
 ```
 
 The unit tests cover the cart, stock and product rules and the error handling against an in-memory repository, so they need no
-database. The SQL and row locking in `MySqlCartRepository` have no automated tests.
+database. The queries in `EfCartRepository` and the row locking have no automated tests.
 
 ## How it works
 
@@ -99,9 +99,14 @@ about 1.7 s and 3.5 MB of raw rows. Both name and code have indexes, and `cart_i
 ```
 Controllers/   HTTP only: routes in, JSON out. ShopExceptionHandler and InvalidRequestResponse turn errors into { message }
 Services/      CartService (carts, checkout), StockService (receiving stock) and ProductService (paging, search)
-Data/          ICartRepository and MySqlCartRepository (Dapper; all SQL lives here)
+Data/          ICartRepository, EfCartRepository (LINQ via Entity Framework Core) and ShopDbContext (table mapping)
 Models/        Product, Cart, CartLine, Receipt, StockLine, StockMovement, requests, ShopException
 ```
+
+All data access is LINQ through Entity Framework Core (Pomelo MySQL provider). The one raw SQL statement is the
+`SELECT ... FOR UPDATE` row lock, which LINQ cannot express. The tables still come from `db/init.sql`, not from EF
+migrations, and `ShopDbContext` only maps them. With MariaDB 10.4, EF writes the codes of a `by-codes` request into the
+SQL as escaped text instead of parameters.
 
 ## API
 
